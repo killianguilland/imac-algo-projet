@@ -33,32 +33,69 @@ bool Board::is_full() {
 }
 
 CellState Board::check_if_someone_won() {
-    for (int i = 0; i < size; i++)
-    {
-        for(int j = 0; j < size; j++) {
-            CellState cell = cells[i * size + j];
-            if (cell == CellState::EMPTY) {
-                continue;
-            }
 
-            // Check horizontal
-            if (j + 2 < size && cell == cells[i * size + j + 1] && cell == cells[i * size + j + 2]) {
-                return cell;
+    // Check rows
+    for (int i = 0; i < size; i++) {
+        CellState first_cell = cells[i * size];
+        if (first_cell == CellState::EMPTY) {
+            continue;
+        }
+        bool is_winning_row = true;
+        for (int j = 1; j < size; j++) {
+            if (cells[i * size + j] != first_cell) {
+                is_winning_row = false;
+                break;
             }
+        }
+        if (is_winning_row) {
+            return first_cell;
+        }
+    }
 
-            // Check vertical
-            if (i + 2 < size && cell == cells[(i + 1) * size + j] && cell == cells[(i + 2) * size + j]) {
-                return cell;
+    // Check columns
+    for (int i = 0; i < size; i++) {
+        CellState first_cell = cells[i];
+        if (first_cell == CellState::EMPTY) {
+            continue;
+        }
+        bool is_winning_column = true;
+        for (int j = 1; j < size; j++) {
+            if (cells[j * size + i] != first_cell) {
+                is_winning_column = false;
+                break;
             }
+        }
+        if (is_winning_column) {
+            return first_cell;
+        }
+    }
 
-            // Check diagonal
-            if (i + 2 < size && j + 2 < size && cell == cells[(i + 1) * size + j + 1] && cell == cells[(i + 2) * size + j + 2]) {
-                return cell;
+    // Check diagonals
+    CellState first_cell = cells[0];
+    if (first_cell != CellState::EMPTY) {
+        bool is_winning_diagonal = true;
+        for (int i = 1; i < size; i++) {
+            if (cells[i * size + i] != first_cell) {
+                is_winning_diagonal = false;
+                break;
             }
+        }
+        if (is_winning_diagonal) {
+            return first_cell;
+        }
+    }
 
-            if (i + 2 < size && j - 2 >= 0 && cell == cells[(i + 1) * size + j - 1] && cell == cells[(i + 2) * size + j - 2]) {
-                return cell;
+    first_cell = cells[size - 1];
+    if (first_cell != CellState::EMPTY) {
+        bool is_winning_diagonal = true;
+        for (int i = 1; i < size; i++) {
+            if (cells[i * size + size - 1 - i] != first_cell) {
+                is_winning_diagonal = false;
+                break;
             }
+        }
+        if (is_winning_diagonal) {
+            return first_cell;
         }
     }
     

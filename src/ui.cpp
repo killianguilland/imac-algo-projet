@@ -9,7 +9,7 @@
 // ============
 
 int ask_board_size() {
-    std::cout << "Quelle taille doit faire le plateau ? (par défaut: " << BOARD_SIZE << ")" << std::endl;
+    std::cout << "Quelle taille doit faire le plateau ? (par défaut : " << BOARD_SIZE << ")" << std::endl;
     std::cout << "➤ ";
 
     int board_size {BOARD_SIZE};
@@ -42,7 +42,7 @@ int ask_board_size() {
 }
 
 char ask_symbol(const char default_symbol) {
-    std::cout << "Choisis ton symbole (par défaut = " << default_symbol << ") :" << std::endl;
+    std::cout << "Choisis ton symbole (par défaut : " << default_symbol << ") :" << std::endl;
     std::cout << "➤ ";
 
     char symbol {};
