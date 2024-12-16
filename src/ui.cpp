@@ -8,6 +8,26 @@
 // PLAYER INPUT
 // ============
 
+bool ask_game_mode() {
+    std::cout << "Choisis un mode de jeu :" << std::endl;
+    std::cout << "1. Joueur contre joueur" << std::endl;
+    std::cout << "2. Joueur contre IA" << std::endl;
+    std::cout << "➤ ";
+
+    // Verify input
+    while (true) {
+        std::string input {};
+        std::getline(std::cin, input);
+        if (input == "1") {
+            return false;
+        } else if (input == "2") {
+            return true;
+        }
+        std::cout << "Entre '1' ou '2'" << std::endl;
+        std::cout << "➤ ";
+    }
+}
+
 int ask_board_size() {
     std::cout << "Quelle taille doit faire le plateau ? (par défaut : " << BOARD_SIZE << ")" << std::endl;
     std::cout << "➤ ";
@@ -23,14 +43,14 @@ int ask_board_size() {
         } else {
             try {
                 board_size = std::stoi(input);
-                if (board_size < 3) {
-                    std::cout << "La taille du plateau doit être supérieure ou égale à 3" << std::endl;
+                if (board_size < 3 || board_size > 26) {
+                    std::cout << "La taille du plateau doit être supérieure ou égale à 3 et inférieure à 26" << std::endl;
                     std::cout << "➤ ";
                 } else {
                     break;
                 }
             } catch (std::invalid_argument) {
-                std::cout << "Entre un nombre valide stp" << std::endl;
+                std::cout << "Entre un nombre valide" << std::endl;
                 std::cout << "➤ ";
             }
         }
@@ -55,7 +75,7 @@ char ask_symbol(const char default_symbol) {
             symbol = default_symbol;
             break;
         } else if (input.size() > 1) {
-            std::cout << "Entre un seul caractère stp" << std::endl;
+            std::cout << "Entre un seul caractère" << std::endl;
             std::cout << "➤ ";
         } else {
             symbol = input[0];
@@ -80,7 +100,7 @@ std::string ask_name() {
         if (!name.empty()) {
             break;
         }
-        std::cout << "Entre un nom stp" << std::endl;
+        std::cout << "Entre un nom" << std::endl;
         std::cout << "➤ ";
     }
 
@@ -105,7 +125,7 @@ std::string ask_coordinates(const std::string player_name, int max_size) {
                 }
             }
         }
-        std::cout << "Entre des coordonnées valides stp" << std::endl;
+        std::cout << "Entre des coordonnées valides" << std::endl;
         std::cout << "➤ ";
     }
 }
@@ -120,6 +140,18 @@ void draw_title() {
     std::cout << "╔═══════════╗" << std::endl;
     std::cout << "║ TICTACTOE ║" << std::endl;
     std::cout << "╚═══════════╝" << std::endl << std::endl;
+}
+
+void draw_progress_animation() {
+    int size = 12;
+    for (int i = 0; i < size; i++)
+    {
+        draw_title();
+        std::cout << "[" << std::string(i, '=') << std::string(size - i - 1, ' ') << "]" << std::endl << std::endl;
+        std::cout << "L'IA réfléchit..." << std::endl << std::endl;
+        terminal_ctrl::sleep(100);
+    }
+    std::cout << std::endl;
 }
 
 void draw_game_board(const Board board, const int cell_size, char player_a_symbol, char player_b_symbol) 

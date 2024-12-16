@@ -11,13 +11,21 @@ int main() {
 
     draw_title();
 
+    bool ai_mode {ask_game_mode()};
+
+    draw_title();
+
     Player player_a {create_player(PLAYER_A_SYMBOL)};
 
     draw_title();
 
-    Player player_b {create_player(PLAYER_B_SYMBOL)};
+    BasePlayer* player_b;
 
-    draw_title();
+    if (ai_mode) {
+        player_b = new AIPlayer{create_ai_player(PLAYER_B_SYMBOL)};
+    } else {
+        player_b = new Player{create_player(PLAYER_B_SYMBOL)};
+    }
 
     Board board{board_size};
 
@@ -26,13 +34,19 @@ int main() {
     while (true) {
         draw_title();
 
-        const Player& current_player = current_player_index ? player_b : player_a;
+        BasePlayer& current_player = current_player_index ? *player_b : player_a;
 
         // board.debug_dump();
 
-        draw_game_board(board, CELL_SIZE, player_a.symbol, player_b.symbol);
+        draw_game_board(board, CELL_SIZE, player_a.symbol, player_b->symbol);
 
-        std::string coordinates = ask_coordinates(current_player.name, board.size);
+        std::string coordinates {};
+
+        if(current_player.is_ai) {
+            draw_progress_animation();
+        }
+
+        coordinates = current_player.get_move(board);
 
         CellState cell_state = board.get_value_from_coordinates(coordinates);
 
@@ -47,14 +61,14 @@ int main() {
 
         if (winner != CellState::EMPTY) {
             draw_title();
-            draw_game_board(board, CELL_SIZE, player_a.symbol, player_b.symbol);
-            std::cout << "Le joueur " << (current_player_index ? player_b.name : player_a.name) << " a gagné !" << std::endl;
+            draw_game_board(board, CELL_SIZE, player_a.symbol, player_b->symbol);
+            std::cout << "Le joueur " << (current_player_index ? player_b->name : player_a.name) << " a gagné !" << std::endl;
             break;
         }
 
         if (board.is_full()) {
             draw_title();
-            draw_game_board(board, CELL_SIZE, player_a.symbol, player_b.symbol);
+            draw_game_board(board, CELL_SIZE, player_a.symbol, player_b->symbol);
             std::cout << "Match nul !" << std::endl;
             break;
         }

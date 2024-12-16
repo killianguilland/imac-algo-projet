@@ -7,10 +7,16 @@ Board::Board(int board_size) {
     cells.resize(size * size, CellState::EMPTY);
 }
 
-int Board::coordinates_to_index(std::string coordinates) {
+int Board::coordinates_to_index(std::string coordinates) const {
     char a = coordinates[0] - 65;
     int y = coordinates[1] - 49;
     return a + y * size;
+}
+
+std::string Board::index_to_coordinates(int index) const {
+    char a = index % size + 65;
+    int y = index / size + 1;
+    return std::string(1, a) + std::to_string(y);
 }
 
 CellState Board::get_value_from_coordinates(std::string coordinates) {

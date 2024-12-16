@@ -2,6 +2,10 @@
 #include <string>
 #include "board.hpp"
 
+bool ask_game_mode();
+
+void draw_progress_animation();
+
 void draw_title();
 
 void dynamic_menu();

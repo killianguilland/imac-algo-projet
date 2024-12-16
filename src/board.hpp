@@ -14,7 +14,9 @@ struct Board {
 
     Board(int board_size);
 
-    int coordinates_to_index(std::string coordinates);
+    int coordinates_to_index(std::string coordinates) const;
+
+    std::string index_to_coordinates(int index) const;
 
     CellState get_value_from_coordinates(std::string coordinates);
 
