@@ -29,7 +29,7 @@ bool ask_game_mode() {
 }
 
 int ask_board_size() {
-    std::cout << "Quelle taille doit faire le plateau ? (par défaut : " << BOARD_SIZE << ")" << std::endl;
+    std::cout << "Quelle taille doit faire le plateau ? (par défaut: " << BOARD_SIZE << ")" << std::endl;
     std::cout << "➤ ";
 
     int board_size {BOARD_SIZE};
@@ -62,7 +62,7 @@ int ask_board_size() {
 }
 
 char ask_symbol(const char default_symbol) {
-    std::cout << "Choisis ton symbole (par défaut : " << default_symbol << ") :" << std::endl;
+    std::cout << "Choisis ton symbole : (par défaut: " << default_symbol << ")" << std::endl;
     std::cout << "➤ ";
 
     char symbol {};
@@ -130,6 +130,26 @@ std::string ask_coordinates(const std::string player_name, int max_size) {
     }
 }
 
+DifficultyChoice ask_difficulty() {
+    std::cout << "Choisis la difficulté de l'IA :" << std::endl;
+    std::cout << "1. Facile" << std::endl;
+    std::cout << "2. Difficile" << std::endl;
+    std::cout << "➤ ";
+
+    // Verify input
+    while (true) {
+        std::string input {};
+        std::getline(std::cin, input);
+        if (input == "1") {
+            return DifficultyChoice::EASY;
+        } else if (input == "2") {
+            return DifficultyChoice::HARD;
+        }
+        std::cout << "Entre '1' ou '2'" << std::endl;
+        std::cout << "➤ ";
+    }
+}
+
 
 // =============
 // DRAWING UTILS
@@ -154,6 +174,11 @@ void draw_progress_animation() {
     std::cout << std::endl;
 }
 
+void announce_ai_move(const std::string coordinates) {
+    std::cout << "L'IA a joué en " << coordinates << std::endl << std::endl;
+    terminal_ctrl::sleep(1000);
+}
+
 void draw_game_board(const Board board, const int cell_size, char player_a_symbol, char player_b_symbol) 
 {
     // Constants
@@ -172,23 +197,6 @@ void draw_game_board(const Board board, const int cell_size, char player_a_symbo
         }
     }
     std::cout << std::endl;
-
-    // for(CellState cell : board.cells) {
-    //     switch (cell)
-    //     {
-    //         case CellState::EMPTY:
-    //             std::cout << " ";
-    //             break;
-
-    //         case CellState::PLAYER_A:
-    //             std::cout << player_a_symbol;
-    //             break;
-
-    //         case CellState::PLAYER_B:
-    //             std::cout << player_b_symbol;
-    //             break;
-    //     }
-    // }
 
     for (int i = 0; i <= v_draw_size; i++)
     {

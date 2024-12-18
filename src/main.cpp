@@ -22,7 +22,8 @@ int main() {
     BasePlayer* player_b;
 
     if (ai_mode) {
-        player_b = new AIPlayer{create_ai_player(PLAYER_B_SYMBOL)};
+        DifficultyChoice difficulty {ask_difficulty()};
+        player_b = new AIPlayer{create_ai_player(PLAYER_B_SYMBOL, difficulty)};
     } else {
         player_b = new Player{create_player(PLAYER_B_SYMBOL)};
     }
@@ -47,6 +48,10 @@ int main() {
         }
 
         coordinates = current_player.get_move(board);
+
+        if(current_player.is_ai) {
+            announce_ai_move(coordinates);
+        }
 
         CellState cell_state = board.get_value_from_coordinates(coordinates);
 

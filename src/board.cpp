@@ -24,8 +24,6 @@ CellState Board::get_value_from_coordinates(std::string coordinates) {
 }
 
 void Board::set_value_from_coordinates(std::string coordinates, CellState value) {
-    std::cout << coordinates << std::endl;
-    std::cout << coordinates_to_index(coordinates) << std::endl;
     cells[coordinates_to_index(coordinates)] = value;
 }
 
