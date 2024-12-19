@@ -24,6 +24,11 @@ settings.hpp    // Contient les constantes du jeu (paramètres par défaut)
     random.cpp  // Librairie reprise du workshop qui contient des fonctions pour la génération de nombres aléatoires
     random.hpp
 ```
+J'ai structuré mon code en plusieurs fichiers pour plus de lisibilité. Le fichier main gère le déroulement globale du jeu. J'ai essayé de le garder le plus simple possible, il fait surtout appel aux fonctions des autres fichiers.
+- Le fichier Board contient une classe qui représente le plateau de jeu et propose plusieurs méthodes pour interagir avec le tableau. C'est là que la fonction qui vérifie si quelqu'un a gagné est située. Le tableau qui contient l'état de chaque case est un vecteur dynamique et non un array fixe car sa taille est déterminée après la compilation (elle dépend de la taille choisie par le joueur)
+- Le fichier Player contient une classe abstraite qui sert de base pour les classes Player (le joueur humain derrière son clavier) et AiPlayer (l'ia du jeu). J'ai essayé de faire en sorte que ces deux classes soient interchangeables. Grâce à ça, on pourrait imaginer faire combattre deux IA assez facilement, ou même rajouter un troisième type de joueur (NetworkPlayer par exemple).
+- le fichier UI est responsable de tout l'affichage dans le terminal. Il sert aussi récupérer les choix du joueur. J'ai choisi de placer les fonctions d'affichage dans ce fichier à part pour pouvoir implémenter la vraie interface graphique plus facilement ensuite (je pensais juste avoir à remplacer le fichier UI mais je n'ai pas eu le temps de terminer (voir la branche gui)).
+-Le fichier settings contient seulement quelques variables qui permettent de modifier l'affichage. 
 
 ## Améliorations
 - Choix de la taille du plateau
