@@ -27,10 +27,12 @@ settings.hpp    // Contient les constantes du jeu (paramètres par défaut)
 
 ## Améliorations
 - Choix de la taille du plateau
+![Capture d'écran de la taille du plateau](readme/gui_screenshot.png?raw=true "Title")
 On peut choisir la taille du plateau pour jouer à un morpion de taille 3x3, 4x4, 5x5, etc.
 Cela a nécessité de modifier la struct Board pour qu'elle puisse gérer une taille variable, et de modifier la struct UI pour qu'elle puisse afficher un plateau de taille variable. L'affichage d'un plateau de taille dynamique a un peu compliqué le code car j'ai utilisé un affichage en ASCII.
 
 - Affichage amélioré
+![Capture d'écran du jeu](readme/gui_screenshot.gif?raw=true "Title")
 J'ai amélioré l'affichage du tableau en affichant un tableau en caractères ASCII, ce qui a été un peu complexe à mettre en place pour une taille de plateau variable. On peut également choisir d'afficher des cases plus ou moins grandes en modifiant la constante `CELL_SIZE` dans le fichier `settings.hpp`.
 Ensuite, j'ai fait en sorte de clear le terminal entre chaque tour pour que le jeu soit plus lisible.
 
