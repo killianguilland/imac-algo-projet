@@ -1,7 +1,7 @@
 #include <settings.hpp>
 #include <string>
 #include <vector>
-#include <iostream>
+// #include <iostream>
 #include "ui.hpp"
 #include "player.hpp"
 #include "lib/random.hpp"
@@ -60,9 +60,9 @@ std::string AIPlayer::get_move(const Board& board) const {
                         CellState winner = board_copy.check_if_someone_won();
                         board_copy.set_value_from_coordinates(current_coordinates, CellState::EMPTY);
 
-                        std::cout << "Current coordinates : " << current_coordinates << std::endl;
+                        // std::cout << "Current coordinates : " << current_coordinates << std::endl;
                         if(winner == CellState::PLAYER_B) {
-                            std::cout << "AI is winning" << std::endl;
+                            // std::cout << "AI is winning" << std::endl;
                             winning_moves.push_back(current_coordinates);
                             continue;
                         }
@@ -72,24 +72,24 @@ std::string AIPlayer::get_move(const Board& board) const {
                         board_copy.set_value_from_coordinates(current_coordinates, CellState::EMPTY);
                         
                         if(winner == CellState::PLAYER_A) {
-                            std::cout << "Player is winning" << std::endl;
+                            // std::cout << "Player is winning" << std::endl;
                             blocking_moves.push_back(current_coordinates);
                             continue;
                         }
                         
-                        std::cout << "No one is winning" << std::endl;
+                        // std::cout << "No one is winning" << std::endl;
                         random_moves.push_back(current_coordinates);
                     }
                 }
 
                 if(winning_moves.size() > 0) {
-                    std::cout << "AI is winning" << std::endl;
+                    // std::cout << "AI is winning" << std::endl;
                     coordinates = winning_moves.at(0);
                 } else if(blocking_moves.size() > 0) {
-                    std::cout << "AI is blocking" << std::endl;
+                    // std::cout << "AI is blocking" << std::endl;
                     coordinates = blocking_moves.at(0);
                 } else {
-                    std::cout << "AI is playing randomly" << std::endl;
+                    // std::cout << "AI is playing randomly" << std::endl;
                     coordinates = random_moves[random_int(0, random_moves.size() - 1)];
                 }
                 break;
