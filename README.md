@@ -1,11 +1,14 @@
 # TICTACTOE - C++
 
 Ce programme est un jeu de morpion en C++.
-Il utilise la librairie standard de C++ et la librairie (terminal-ctrl)[https://github.com/dsmtE/terminal_ctrl/tree/main] pour vider le terminal simplement (peu importe l'os) et pour sleep().
+Il utilise la librairie standard de C++ et la librairie [terminal-ctrl](https://github.com/dsmtE/terminal_ctrl/tree/main) pour vider le terminal simplement (peu importe l'os) et pour sleep().
 Le jeu a été testé sous macOS et Linux.
 
 ## Exécution
 Pour exécuter le programme, il suffit de compiler le fichier main.cpp avec un compilateur C++ (g++ par exemple) et de l'exécuter.
+
+! Pour la branche GUI, il faut installer [Raylib](https://www.raylib.com/) pour l'affichage graphique.
+
 
 ## Structure
 ```
@@ -29,12 +32,14 @@ Cela a nécessité de modifier la struct Board pour qu'elle puisse gérer une ta
 
 - Affichage amélioré
 J'ai amélioré l'affichage du tableau en affichant un tableau en caractères ASCII, ce qui a été un peu complexe à mettre en place pour une taille de plateau variable. On peut également choisir d'afficher des cases plus ou moins grandes en modifiant la constante `CELL_SIZE` dans le fichier `settings.hpp`.
-Enfin, j'ai fait en sorte de clear le terminal entre chaque tour pour que le jeu soit plus lisible.
+Ensuite, j'ai fait en sorte de clear le terminal entre chaque tour pour que le jeu soit plus lisible.
 
 - Choix de la difficulté de l'IA
 J'ai commencé par implémenter une IA facile (qui joue au hasard) comme demandé dans le sujet. Au moment de l'améliorer, j'ai ajouté une condition qui permet de choisir le niveau de difficulté de l'IA. L'IA facile joue toujours au hasard, mais l'IA difficile essaie de bloquer les mouvements du joueur et de gagner si elle en a l'occasion.
 
 - Interface graphique (branche `gui`)
+![alt text](./readme/gui_screenshot.png)
+pas eu le temps de finir
 
 
 ## Bilan

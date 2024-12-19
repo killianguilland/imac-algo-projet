@@ -3,6 +3,8 @@
 #include "board.hpp"
 #include "player.hpp"
 
+void init_raylib();
+
 bool ask_game_mode();
 
 void draw_progress_animation();

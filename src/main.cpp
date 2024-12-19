@@ -5,6 +5,8 @@
 #include "board.hpp"
 
 int main() {
+    init_raylib();
+
     draw_title();
 
     int board_size {ask_board_size()};

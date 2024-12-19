@@ -23,5 +23,11 @@ FetchContent_Declare(
     GIT_TAG "origin/main"
 )
 
+
+find_package(raylib REQUIRED)
+
 FetchContent_MakeAvailable(terminal_ctrl)
-target_link_libraries(${PROJECT_NAME} PRIVATE terminal_ctrl)
+target_link_libraries(${PROJECT_NAME} PRIVATE terminal_ctrl raylib)
+
+# (Optional) Include Raylib headers for IDEs
+target_include_directories(${PROJECT_NAME} PRIVATE ${RAYLIB_INCLUDE_DIRS})
